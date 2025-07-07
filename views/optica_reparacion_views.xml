@@ -1,0 +1,64 @@
+<odoo>
+    <record id="optica_reparacion_action" model="ir.actions.act_window">
+        <field name="name">Reparaciones</field>
+        <field name="res_model">reparacion</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="optica_reparacion_view_tree" model="ir.ui.view">
+        <field name="name">Lista de reparaciones</field>
+        <field name="model">reparacion</field>
+        <field name="arch" type="xml">
+            <tree string="Channel">
+                <field name="garantia_id"/>
+                <field name="fecha"/>
+                <field name="tecnico_responsable"/>
+                <field name="estado"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="optica_reparacion_view_form" model="ir.ui.view">
+        <field name="name">Formulario de reparacion</field>
+        <field name="model">reparacion</field>
+        <field name="arch" type="xml">
+            <form string="Test">
+                <sheet>
+                    <group>
+                        <field name="garantia_id"/>
+                        <field name="fecha"/>
+                        <field name="descripcion_trabajo"/>
+                        <field name="tecnico_responsable"/>
+                        <field name="costo_reparacion"/>
+                        <field name="estado"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="optica_reparacion_view_search" model="ir.ui.view">
+        <field name="name">reparacion Search</field>
+        <field name="model">reparacion</field>
+        <field name="arch" type="xml">
+            <search string="Delivery Carrier">
+                <field name="garantia_id" string="Número de garantía"/>
+                <separator/>
+                <filter string="Coste mayor de 1000 euros" name="costo_reparacion" domain="[('costo_reparacion', '>=', 1000)]"/>
+                <filter string="Coste menor de 1000 euros" name="costo_reparacion" domain="[('costo_reparacion', '&lt;', 1000)]"/>
+                <separator/>
+                <filter string="En curso" name="estado" domain="[('estado', '=', 'en_curso')]"/>
+                <filter string="Completadas" name="estado" domain="[('estado', '=', 'completada')]"/>
+                <group expand="1" string="Group By">
+                    <filter string="Garantía" name="garantia" context="{'group_by':'garantia_id', 'residual_visible':True}"/>
+                </group>
+                <group expand="1" string="Group By">
+                    <filter string="Técnico" name="tecnico" context="{'group_by':'tecnico_responsable', 'residual_visible':True}"/>
+                </group>
+                <group expand="1" string="Group By">
+                    <filter string="Estado" name="estado" context="{'group_by':'estado', 'residual_visible':True}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

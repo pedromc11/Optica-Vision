@@ -1,0 +1,7 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_revision_model,access_revision_model,model_revision,base.group_user,1,1,1,1
+access_tienda_model,access_tienda_model,model_tienda,base.group_user,1,1,1,1
+access_dia_model,access_dia_model,model_dia,base.group_user,1,1,1,1
+access_garantia_model,access_garantia_model,model_garantia,base.group_user,1,1,1,1
+access_reparacion_model,access_reparacion_model,model_reparacion,base.group_user,1,1,1,1
+access_reemplazo_model,access_reemplazo_model,model_reemplazo,base.group_user,1,1,1,1

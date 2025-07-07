@@ -1,0 +1,56 @@
+<odoo>
+    <record id="optica_reemplazo_action" model="ir.actions.act_window">
+        <field name="name">Reemplazos</field>
+        <field name="res_model">reemplazo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="optica_reemplazo_view_tree" model="ir.ui.view">
+        <field name="name">Lista de reemplazos</field>
+        <field name="model">reemplazo</field>
+        <field name="arch" type="xml">
+            <tree string="Channel">
+                <field name="garantia_id"/>
+                <field name="fecha"/>
+                <field name="motivo_reemplazo"/>
+                <field name="estado"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="optica_reemplazo_view_form" model="ir.ui.view">
+        <field name="name">Formulario de reemplazo</field>
+        <field name="model">reemplazo</field>
+        <field name="arch" type="xml">
+            <form string="Test">
+                <sheet>
+                    <group>
+                        <field name="garantia_id"/>
+                        <field name="fecha"/>
+                        <field name="motivo_reemplazo"/>
+                        <field name="estado"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="optica_reemplazo_view_search" model="ir.ui.view">
+        <field name="name">reemplazo Search</field>
+        <field name="model">reemplazo</field>
+        <field name="arch" type="xml">
+            <search string="Delivery Carrier">
+                <field name="garantia_id" string="Número de garantía"/>
+                <separator/>
+                <filter string="En curso" name="estado" domain="[('estado', '=', 'en_curso')]"/>
+                <filter string="Completadas" name="estado" domain="[('estado', '=', 'completada')]"/>
+                <group expand="1" string="Group By">
+                    <filter string="Garantía" name="garantia" context="{'group_by':'garantia_id', 'residual_visible':True}"/>
+                </group>
+                <group expand="1" string="Group By">
+                    <filter string="Estado" name="estado" context="{'group_by':'estado', 'residual_visible':True}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

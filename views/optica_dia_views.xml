@@ -1,0 +1,33 @@
+<odoo>
+    <record id="optica_dia_action" model="ir.actions.act_window">
+        <field name="name">Días de la semana</field>
+        <field name="res_model">dia</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="optica_dia_view_tree" model="ir.ui.view">
+        <field name="name">Lista de dias</field>
+        <field name="model">dia</field>
+        <field name="arch" type="xml">
+            <tree string="Channel">
+                <field name="nombre"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="optica_dia_view_form" model="ir.ui.view">
+        <field name="name">Formulario de dia</field>
+        <field name="model">dia</field>
+        <field name="arch" type="xml">
+            <form string="Test">
+                <sheet>
+                    <group>
+                        <h1>
+                            <field name="nombre" placeholder="Nombre"/>
+                        </h1>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

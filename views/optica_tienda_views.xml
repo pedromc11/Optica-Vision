@@ -1,0 +1,84 @@
+<odoo>
+    <record id="optica_tienda_action" model="ir.actions.act_window">
+        <field name="name">Tiendas</field>
+        <field name="res_model">tienda</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="optica_tienda_view_tree" model="ir.ui.view">
+        <field name="name">Lista de tiendas</field>
+        <field name="model">tienda</field>
+        <field name="arch" type="xml">
+            <tree string="Channel">
+                <field name="nombre"/>
+                <field name="direccion"/>
+                <field name="ciudad"/>
+                <field name="provincia"/>
+                <field name="telefono"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="optica_tienda_view_form" model="ir.ui.view">
+        <field name="name">Formulario de tienda</field>
+        <field name="model">tienda</field>
+        <field name="arch" type="xml">
+            <form string="Test">
+                <header>
+                    <group>
+                        <button name="action_abrir_finde_semana" type="object" string="Abrir fin de semana"/>
+                        <button name="action_cerrar_finde_semana" type="object" string="Cerrar fin de semana"/>
+                    </group>
+                </header>
+                <sheet>
+                    <group>
+                        <h1>
+                            <field name="nombre" placeholder="Nombre"/>
+                        </h1>
+                        <group>
+                            <field name="direccion"/>
+                            <field name="ciudad"/>
+                            <field name="provincia"/>
+                            <field name="telefono"/>
+                            <field name="descripcion"/>
+                        </group>
+                        <notebook>
+                            <page string="Días de atención">
+                                <group>
+                                    <field name="dias_ids" widget="many2many_tags"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="optica_tienda_view_search" model="ir.ui.view">
+        <field name="name">Tienda Search</field>
+        <field name="model">tienda</field>
+        <field name="arch" type="xml">
+            <search string="Delivery Carrier">
+                <field name="nombre" string="Nombre"/>
+                <separator/>
+                <filter string="Lunes" name="lunes" domain="[('dias_ids.nombre', 'in', ['Lunes'])]"/>
+                <filter string="Martes" name="martes" domain="[('dias_ids.nombre', 'in', ['Martes'])]"/>
+                <filter string="Miércoles" name="miercoles" domain="[('dias_ids.nombre', 'in', ['Miércoles'])]"/>
+                <filter string="Jueves" name="jueves" domain="[('dias_ids.nombre', 'in', ['Jueves'])]"/>
+                <filter string="Viernes" name="viernes" domain="[('dias_ids.nombre', 'in', ['Viernes'])]"/>
+                <filter string="Sábado" name="sabado" domain="[('dias_ids.nombre', 'in', ['Sábado'])]"/>
+                <filter string="Domingo" name="domingo" domain="[('dias_ids.nombre', 'in', ['Domingo'])]"/>
+                <group expand="1" string="Group By">
+                    <filter string="Nombre" name="nombre" context="{'group_by':'nombre', 'residual_visible':True}"/>
+                </group>
+                <group expand="1" string="Group By">
+                    <filter string="Provincia" name="provincia" context="{'group_by':'provincia', 'residual_visible':True}"/>
+                </group>
+                <group expand="1" string="Group By">
+                    <filter string="Ciudad" name="ciudad" context="{'group_by':'ciudad', 'residual_visible':True}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

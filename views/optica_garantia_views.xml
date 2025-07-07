@@ -1,0 +1,81 @@
+<odoo>
+    <record id="optica_garantia_action" model="ir.actions.act_window">
+        <field name="name">Garantías</field>
+        <field name="res_model">garantia</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="optica_garantia_view_tree" model="ir.ui.view">
+        <field name="name">Lista de garantias</field>
+        <field name="model">garantia</field>
+        <field name="arch" type="xml">
+            <tree string="Channel">
+                <field name="numero_garantia"/>
+                <field name="fecha_compra"/>
+                <field name="producto_id"/>
+                <field name="cliente_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="optica_garantia_view_form" model="ir.ui.view">
+        <field name="name">Formulario de garantia</field>
+        <field name="model">garantia</field>
+        <field name="arch" type="xml">
+            <form string="Test">
+                <header>
+                    <group>
+                        <button name="action_reclamar_garantia" type="object" string="Reclamar garantía"/>
+                        <button name="action_ampliar_garantia" type="object" string="Ampliar 1 año de garantía"/>
+                    </group>
+                </header>
+                <sheet>
+                    <group>
+                        <h1>
+                            <field name="numero_garantia" placeholder="Número Garantía"/>
+                        </h1>
+                        <group>
+                            <field name="fecha_compra"/>
+                            <field name="producto_id"/>
+                            <field name="cliente_id"/>
+                            <field name="tipo_garantia"/>
+                            <field name="periodo_cobertura"/>
+                            <field name="descripcion_problema"/>
+                            <field name="estado"/>
+                            <field name="estado_descripcion"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="optica_garantia_view_search" model="ir.ui.view">
+        <field name="name">Garantia Search</field>
+        <field name="model">garantia</field>
+        <field name="arch" type="xml">
+            <search string="Delivery Carrier">
+                <field name="numero_garantia" string="Número de garantía"/>
+                <separator/>
+                <filter string="De fabricante" name="tipo" domain="[('tipo_garantia', '=', 'fabricante')]"/>
+                <filter string="De tienda" name="tipo" domain="[('tipo_garantia', '=', 'tienda')]"/>
+                <separator/>
+                <filter string="Activas" name="estado" domain="[('estado', '=', 'activa')]"/>
+                <filter string="Vencidas" name="estado" domain="[('estado', '=', 'vencida')]"/>
+                <filter string="Reclamadas" name="estado" domain="[('estado', '=', 'reclamada')]"/>
+                <group expand="1" string="Group By">
+                    <filter string="Producto" name="producto" context="{'group_by':'producto_id', 'residual_visible':True}"/>
+                </group>
+                <group expand="1" string="Group By">
+                    <filter string="Cliente" name="cliente" context="{'group_by':'cliente_id', 'residual_visible':True}"/>
+                </group>
+                <group expand="1" string="Group By">
+                    <filter string="Tipo" name="tipo_garantia" context="{'group_by':'tipo_garantia', 'residual_visible':True}"/>
+                </group>
+                <group expand="1" string="Group By">
+                    <filter string="Estado" name="estado" context="{'group_by':'estado', 'residual_visible':True}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

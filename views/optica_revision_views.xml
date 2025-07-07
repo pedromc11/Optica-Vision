@@ -1,0 +1,119 @@
+<odoo>
+    <record id="optica_revision_action" model="ir.actions.act_window">
+        <field name="name">Revisiones</field>
+        <field name="res_model">revision</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="optica_revision_kanban" model="ir.actions.act_window">
+        <field name="name">Kanban de revisiones</field>
+        <field name="res_model">revision</field>
+        <field name="view_mode">kanban</field>
+    </record>
+
+    <record id="optica_revision_view_tree" model="ir.ui.view">
+        <field name="name">Lista de revisiones</field>
+        <field name="model">revision</field>
+        <field name="arch" type="xml">
+            <tree string="Channel">
+                <field name="cliente"/>
+                <field name="tienda_id"/>
+                <field name="calificacion"/>
+                <field name="fecha"/>
+                <field name="tipo"/>
+                <field name="estado"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="optica_revision_view_form" model="ir.ui.view">
+        <field name="name">Formulario de revision</field>
+        <field name="model">revision</field>
+        <field name="arch" type="xml">
+            <form string="Test">
+                <sheet>
+                    <group>
+                        <h1>
+                            <field name="cliente" placeholder="Cliente"/>
+                        </h1>
+                        <group>
+                            <field name="fecha"/>
+                            <field name="tipo"/>
+                            <field name="profesional" domain="[('title', '=', tipo)]"/>
+                            <field name="observaciones"/>
+                            <field name="calificacion"/>
+                            <field name="tienda_id"/>
+                            <field name="estado"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="optica_revision_view_search" model="ir.ui.view">
+        <field name="name">Revision Search</field>
+        <field name="model">revision</field>
+        <field name="arch" type="xml">
+            <search string="Delivery Carrier">
+                <field name="cliente" string="Cliente"/>
+                <field name="tienda_id" string="Tienda"/>
+                <separator/>
+                <filter string="Revisiones de vista" name="tipo" domain="[('tipo', '=', 'Optometrista')]"/>
+                <filter string="Revisiones de audición" name="tipo" domain="[('tipo', '=', 'Otorrino')]"/>
+                <separator/>
+                <filter string="Pendientes" name="estado" domain="[('estado', '=', 'pendiente')]"/>
+                <filter string="Hechas" name="estado" domain="[('estado', '=', 'hecha')]"/>
+                <filter string="Rechazadas" name="estado" domain="[('estado', '=', 'rechazada')]"/>
+                <filter string="Aplazadas" name="estado" domain="[('estado', '=', 'aplazada')]"/>
+                <group expand="1" string="Group By">
+                    <filter string="Cliente" name="cliente" context="{'group_by':'cliente', 'residual_visible':True}"/>
+                </group>
+                <group expand="1" string="Group By">
+                    <filter string="Tienda" name="tienda_id" context="{'group_by':'tienda_id', 'residual_visible':True}"/>
+                </group>
+                <group expand="1" string="Group By">
+                    <filter string="Estado" name="estado" context="{'group_by':'estado', 'residual_visible':True}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    
+    <record id="optica_revision_kanban_view" model="ir.ui.view">
+        <field name="name">Kanban de revisiones</field>
+        <field name="model">revision</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="estado" groups_draggable="True" columns_draggable="True">
+                <!-- Definir las columnas basadas en el atributo 'estado' -->
+                <field name="estado"/>
+                <!-- Agrupar los elementos en las columnas según el estado -->
+                <templates>
+                    <t t-name="kanban-box">
+                        <div>
+                            <div class="oe_kanban_card_image">
+                                <field-image name="cliente.image" size="small"/>
+                            </div>
+                            <div class="card-header d-flex justify-content-between aling-items-center">
+                                <strong class="text-primary">
+                                    <field name="cliente"/>
+                                </strong>
+                            </div>
+                            <div class="p-2 ps-3">
+                                <i class="fa fa-calendar me-2" title="Fecha"></i>
+                                <field name="fecha"/>
+                                <br/>
+                                <i class="fa fa-building me-2" title="Tienda"></i>
+                                <field name="tienda_id"/>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between aling-items-center">
+                                <strong class="text-info">
+                                    Revisión de <field name="tipo"/>
+                                </strong>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>   

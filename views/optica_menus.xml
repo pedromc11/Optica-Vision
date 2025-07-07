@@ -1,0 +1,15 @@
+<odoo>
+    <menuitem id="optica_menu_root" name="Óptica Visión">
+        <menuitem id="optica_revisiones_menu" name="Registro">
+            <menuitem id="revision_menu_action" action="optica_revision_action"/>
+            <menuitem id="revision_kanban_action" action="optica_revision_kanban"/>
+        </menuitem>
+        <menuitem id="tiendas_menu_action" action="optica_tienda_action"/>
+        <!--<menuitem id="dias_menu_action" action="optica_dia_action"/>-->
+        <menuitem id="garantias_menu_action" action="optica_garantia_action"/>
+        <menuitem id="optica_tramites_menu" name="Trámites de garantías">
+            <menuitem id="reparacion_menu_action" action="optica_reparacion_action"/>
+            <menuitem id="reemplazo_menu_action" action="optica_reemplazo_action"/>
+        </menuitem>
+    </menuitem>
+</odoo>
